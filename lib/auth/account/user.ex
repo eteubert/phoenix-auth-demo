@@ -17,6 +17,7 @@ defmodule Auth.Account.User do
     user
     |> cast(attrs, [:email, :plain_password, :password])
     |> validate_required([:email, :plain_password])
+    |> unique_constraint(:email)
     |> encrypt_password
   end
 
