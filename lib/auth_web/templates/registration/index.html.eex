@@ -1,22 +1,27 @@
 <h1>Register</h1>
 
-<form method="POST" action="/register">
+<%= form_for @changeset, "/register", fn f -> %>
+  
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
 
-    <input type="hidden" id="_csrf_token"  name="_csrf_token" value="<%= get_csrf_token() %>">
+  <div class="form-group">
+    <%= label f, :email, class: "control-label" %>
+    <%= text_input f, :email, class: "form-control" %>
+    <%= error_tag f, :email %>
+  </div>
 
-    <div class="form-group">
-        <label>
-            Email
-            <input type="email" name="email" class="form-control">
-        </label>
-    </div>
-    <div class="form-group">
-        <label>
-            Password
-            <input type="password" name="plain_password" class="form-control">
-        </label>
-    </div>
-    <div class="form-group">
-        <button class="btn btn-primary">Register</button>
-    </div>
-</form>
+  <div class="form-group">
+    <%= label f, :plain_password, "Password", class: "control-label" %>
+    <%= text_input f, :plain_password, class: "form-control" %>
+    <%= error_tag f, :plain_password %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Register", class: "btn btn-primary" %>
+  </div>
+
+<% end %>

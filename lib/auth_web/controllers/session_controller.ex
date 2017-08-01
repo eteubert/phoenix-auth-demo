@@ -15,10 +15,18 @@ defmodule AuthWeb.SessionController do
 
     if valid do
       conn
+      |> Guardian.Plug.sign_in(user)
       |> put_flash(:info, "Login!")
       |> redirect(to: "/")
     else
       render conn, "index.html"
     end
+  end
+
+  def destroy(conn, _params) do
+    conn
+    |> Guardian.Plug.sign_out
+    |> put_flash(:info, "Logged out")
+    |> redirect(to: "/")
   end
 end

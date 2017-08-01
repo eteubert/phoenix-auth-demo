@@ -5,10 +5,11 @@ defmodule AuthWeb.RegistrationController do
   alias Auth.Account.User
 
   def new(conn, _params) do
-    render conn, "index.html"
+    changeset = Account.change_user(%User{})
+    render conn, "index.html", changeset: changeset
   end
 
-  def create(conn, params) do
+  def create(conn, %{"user" => params}) do
     case Account.create_user(params) do
       {:ok, user} ->
         conn

@@ -16,6 +16,13 @@
       <li>
         <a href="https://github.com/phoenixframework/phoenix">Source</a>
       </li>
+      <li>
+        <%= if @current_user do %>
+          User: <%= @current_user.email %>
+        <% else %>
+          Not Logged in
+        <% end %>
+      </li>
     </ul>
   </div>
 

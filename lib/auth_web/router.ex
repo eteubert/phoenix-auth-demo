@@ -9,12 +9,18 @@ defmodule AuthWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :browser_session do
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.LoadResource
+    plug Auth.Plug.SetCurrentUser
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   scope "/", AuthWeb do
-    pipe_through :browser # Use the default browser stack
+    pipe_through [:browser, :browser_session]
 
     get "/", PageController, :index
 
@@ -22,6 +28,7 @@ defmodule AuthWeb.Router do
 
     get "/login", SessionController, :new
     post "/login", SessionController, :create
+    get "/logout", SessionController, :destroy
 
     get "/register", RegistrationController, :new
     post "/register", RegistrationController, :create

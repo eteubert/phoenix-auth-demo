@@ -1,4 +1,4 @@
-defmodule GuardianSerializer do
+defmodule Auth.GuardianSerializer do
     @behaviour Guardian.Serializer
 
   alias Auth.Repo
