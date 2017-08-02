@@ -1,5 +1,10 @@
 # Auth
 
+Requirements:
+
+  * Erlang 20+
+  * Elixir 1.5+
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
