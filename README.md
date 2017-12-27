@@ -1,5 +1,7 @@
 # Auth
 
+Uses [guardian](https://hex.pm/packages/guardian) 1.0 and [comeonin](https://hex.pm/packages/comeonin) 4.0.
+
 Requirements:
 
   * Erlang 20+

@@ -1,9 +1,7 @@
 defmodule AuthWeb.SessionController do
   use AuthWeb, :controller
 
-  alias Auth.Repo
   alias Auth.Account
-  alias Auth.Account.User
 
   def new(conn, _params) do
     render conn, "index.html"
@@ -15,7 +13,7 @@ defmodule AuthWeb.SessionController do
 
     if valid do
       conn
-      |> Guardian.Plug.sign_in(user)
+      |> Auth.Guardian.Plug.sign_in(user)
       |> put_flash(:info, "Login!")
       |> redirect(to: "/")
     else
@@ -25,7 +23,7 @@ defmodule AuthWeb.SessionController do
 
   def destroy(conn, _params) do
     conn
-    |> Guardian.Plug.sign_out
+    |> Auth.Guardian.Plug.sign_out
     |> put_flash(:info, "Logged out")
     |> redirect(to: "/")
   end

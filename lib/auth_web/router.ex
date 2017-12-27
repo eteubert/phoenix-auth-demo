@@ -10,8 +10,7 @@ defmodule AuthWeb.Router do
   end
 
   pipeline :browser_session do
-    plug Guardian.Plug.VerifySession
-    plug Guardian.Plug.LoadResource
+    plug Auth.AuthAccessPipeline
     plug Auth.Plug.SetCurrentUser
   end
 
